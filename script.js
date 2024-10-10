@@ -4,6 +4,8 @@ const instructionText = document.getElementById("instruction-text");
 const logo = document.getElementById("logo");
 const score = document.getElementById("score");
 const highScoreText = document.getElementById("highScore");
+const gameMusic = document.getElementById("game-music");
+const gameLost = document.getElementById("losing-game-sound");
 
 // Define game variables
 const gridSize = 20;
@@ -99,6 +101,7 @@ function startGame() {
   gameStarted = true; // Keep track of a running game
   instructionText.style.display = "none";
   logo.style.display = "none";
+  gameMusic.play();
   gameInterval = setInterval(() => {
     move();
     checkCollision();
@@ -167,6 +170,9 @@ function resetGame() {
   direction = "right";
   gameSpeedDelay = 200;
   updateScore();
+  gameMusic.pause();
+  gameMusic.currentTime = 0;
+  gameLost.play();
 }
 
 function updateScore() {
